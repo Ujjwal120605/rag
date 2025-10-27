@@ -1,0 +1,10 @@
+streamlit
+google-generativeai
+PyPDF2
+python-docx
+pathlib
+langchain
+chromadb
+openai
+tiktoken
+unstructured
