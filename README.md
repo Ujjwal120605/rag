@@ -90,11 +90,7 @@ The Gemini model uses context to answer queries or summarize intelligently.
 Interactive Responses
 Streamlit displays real-time answers in a chat-like interface.
 
-🖼️ Sample Screenshot
-Add a screenshot after deployment:
 
-<img width="1440" height="779" alt="Screenshot 2025-10-27 at 7 17 35 PM" src="https://github.com/user-attachments/assets/83f1173b-a647-41ef-ac5d-09dc116a4652" />
-<img width="1440" height="900" alt="Screenshot 2025-10-27 at 6 52 43 PM" src="https://github.com/user-attachments/assets/7da1b584-250a-4efe-8591-a48fd157a48b" />
 
 
 ☁️ Deployment on Streamlit Cloud
