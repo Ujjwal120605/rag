@@ -45,6 +45,20 @@ this is how it looks (https://xhafk39x7r8rvjkwli6wbn.streamlit.app/)
 | **Language** | Python 3.10+ |
 
 ---
+#Sample Screenshot
+<img width="1440" height="771" alt="Screenshot 2025-10-27 at 7 16 31 PM" src="https://github.com/user-attachments/assets/92a9819c-cfab-462c-88b9-169122072306" />
+<img width="1440" height="777" alt="Screenshot 2025-10-27 at 7 19 07 PM" src="https://github.com/user-attachments/assets/6af81b81-dfae-4662-bc80-62b7e5e4f100" />
+<img width="1440" height="774" alt="Screenshot 2025-10-27 at 7 18 16 PM" src="https://github.com/user-attachments/assets/0f8c8f7c-27e9-4a3b-ad63-a73cd2f0a961" />
+<img width="1440" height="783" alt="Screenshot 2025-10-27 at 7 19 27 PM" src="https://github.com/user-attachments/assets/6fc0ef3f-5533-48f7-8ffe-4b99430c49af" />
+<img width="1440" height="776" alt="Screenshot 2025-10-27 at 7 20 05 PM" src="https://github.com/user-attachments/assets/cbcdacd6-61cb-4954-8421-fe66c921b977" />
+<img width="1440" height="783" alt="Screenshot 2025-10-27 at 7 20 41 PM" src="https://github.com/user-attachments/assets/faf5c5a9-75bf-4450-9ba8-fdc83ac3282b" />
+<img width="1440" height="779" alt="Screenshot 2025-10-27 at 7 17 35 PM" src="https://github.com/user-attachments/assets/8d4d8e9f-bc3e-4f47-8c91-e536b7dcb0e6" />
+<img width="1440" height="900" alt="Screenshot 2025-10-27 at 6 52 43 PM" src="https://github.com/user-attachments/assets/941dac94-bc58-403f-9bd5-19ac5626f868" />
+
+
+
+
+
 
 ## 📦 Installation & Setup
 
