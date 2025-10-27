@@ -8,6 +8,11 @@ import json
 import time
 from datetime import datetime
 import hashlib
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # --- Page Configuration ---
 st.set_page_config(
@@ -261,15 +266,61 @@ init_session_state()
 with st.sidebar:
     st.markdown("## ⚙️ Configuration")
     
-    # API Key with validation indicator
-    api_key = st.text_input(
-        "🔑 Google AI API Key",
-        type="password",
-        help="Get your key from https://aistudio.google.com/app/apikey"
-    )
+    # Try to load API key from environment variable or config file
+    default_api_key = os.getenv('GOOGLE_API_KEY', '')
     
-    if api_key:
-        st.markdown('<span class="success-badge">✓ API Key Set</span>', unsafe_allow_html=True)
+    # If no env variable, try loading from config.json
+    if not default_api_key:
+        try:
+            if os.path.exists('config.json'):
+                with open('config.json', 'r') as f:
+                    config = json.load(f)
+                    default_api_key = config.get('GOOGLE_API_KEY', '')
+        except:
+            pass
+    
+    # API Key input with saved value
+    if default_api_key:
+        st.success("✅ API Key Loaded Successfully!")
+        api_key = default_api_key
+        show_key_input = st.checkbox("🔑 Change API Key", value=False)
+        
+        if show_key_input:
+            new_api_key = st.text_input(
+                "Enter New API Key",
+                type="password",
+                help="Get your key from https://aistudio.google.com/app/apikey"
+            )
+            
+            if st.button("💾 Save New Key"):
+                try:
+                    with open('config.json', 'w') as f:
+                        json.dump({'GOOGLE_API_KEY': new_api_key}, f)
+                    st.success("✅ API Key saved! Refresh the page.")
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Error saving key: {e}")
+    else:
+        st.warning("⚠️ No API Key Found - Please enter your key")
+        api_key = st.text_input(
+            "🔑 Google AI API Key",
+            type="password",
+            help="Get your key from https://aistudio.google.com/app/apikey"
+        )
+        
+        if api_key:
+            save_key = st.checkbox("💾 Save API Key for future use")
+            
+            if save_key and st.button("Save Key"):
+                try:
+                    # Save to config.json
+                    with open('config.json', 'w') as f:
+                        json.dump({'GOOGLE_API_KEY': api_key}, f)
+                    st.success("✅ API Key saved successfully! Refresh the page.")
+                    time.sleep(1)
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Error saving key: {e}")
     
     st.markdown("---")
     
