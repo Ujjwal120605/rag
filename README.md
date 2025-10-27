@@ -30,7 +30,9 @@
 - Works seamlessly both locally and on **Streamlit Cloud**.
 
 ---
-
+##Live Demo
+well ive deployed it on streamlit website
+this is how it looks (https://xhafk39x7r8rvjkwli6wbn.streamlit.app/)
 ## 🧩 Tech Stack
 
 | Component | Technology Used |
@@ -73,8 +75,7 @@ bash
 Copy code
 streamlit run app.py
 Then open your browser at 👉 http://localhost:8501
-well ive deployed it on streamlit website
-this is how it looks (https://xhafk39x7r8rvjkwli6wbn.streamlit.app/)
+
 
 🧠 How It Works
 Upload a PDF
