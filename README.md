@@ -32,7 +32,7 @@
 ---
 ##Live Demo
 well ive deployed it on streamlit website
-this is how it looks (https://xhafk39x7r8rvjkwli6wbn.streamlit.app/)
+this is how it looks (https://rag-henna.vercel.app/))
 ## 🧩 Tech Stack
 
 | Component | Technology Used |
