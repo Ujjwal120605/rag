@@ -16,7 +16,7 @@ load_dotenv()
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="Advanced Gemini Document Analyzer",
+    page_title="Advanced Document Analyzer",
     page_icon="🤖",
     layout="wide",
     initial_sidebar_state="expanded"
