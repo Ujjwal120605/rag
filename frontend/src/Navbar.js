@@ -1,7 +1,6 @@
-// Navbar.jsx
 import React from 'react';
 
-function Navbar({ onNavigate, currentPage }) {
+function Navbar({ onNavigate, currentPage, onTryNow }) { // Add onTryNow prop
   const navLinks = [
     { name: 'Home', page: 'home' },
     { name: 'About', page: 'about' },
@@ -77,7 +76,7 @@ function Navbar({ onNavigate, currentPage }) {
         </div>
 
         <button
-          onClick={() => window.open('https://xhafk39x7r8rvjkwli6wbn.streamlit.app/', '_blank')}
+          onClick={onTryNow} // Use the callback prop
           style={{
             padding: '0.7rem 1.8rem',
             fontSize: '1rem',

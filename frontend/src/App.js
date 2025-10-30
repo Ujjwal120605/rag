@@ -2,12 +2,20 @@ import React, { useState } from 'react';
 import GradientBlinds from './GradientBlinds';
 import Navbar from './Navbar';
 import About from './About';
+import SignInModal from './SignInModal'; // Add this import
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isHovered, setIsHovered] = useState(false);
+  const [showSignInModal, setShowSignInModal] = useState(false); // Add this state
 
   const handleGetStarted = () => {
+    setShowSignInModal(true); // Show modal instead of direct redirect
+  };
+
+  const handleSignIn = () => {
+    setShowSignInModal(false);
+    // Redirect to your app after sign in
     window.location.href = 'https://xhafk39x7r8rvjkwli6wbn.streamlit.app/';
   };
 
@@ -16,12 +24,23 @@ function App() {
       width: '100vw',
       minHeight: '100vh',
       position: 'relative',
-      overflow: currentPage === 'about' ? 'auto' : 'hidden', // Enable scroll for about page
+      overflow: currentPage === 'about' ? 'auto' : 'hidden',
       margin: 0,
       padding: 0,
       background: '#000'
     }}>
-      <Navbar onNavigate={setCurrentPage} currentPage={currentPage} />
+      <Navbar 
+          onNavigate={setCurrentPage} 
+          currentPage={currentPage}
+          onTryNow={() => setShowSignInModal(true)} // Add this prop
+        />
+
+      {/* Add SignInModal here */}
+      <SignInModal 
+        isOpen={showSignInModal} 
+        onClose={() => setShowSignInModal(false)} 
+        onSignIn={handleSignIn}
+      />
 
       {currentPage === 'home' && (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
