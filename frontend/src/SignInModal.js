@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider, githubProvider } from './firebase';
 
 function SignInModal({ isOpen, onClose, onSignIn }) {
   const [email, setEmail] = useState('');
@@ -13,6 +15,53 @@ function SignInModal({ isOpen, onClose, onSignIn }) {
     const stored = localStorage.getItem('documind_users');
     return stored ? JSON.parse(stored) : [];
   });
+  const handleGoogleSignIn = async () => {
+    setError('');
+    setLoading(true);
+    
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      
+      localStorage.setItem('documind_current_user', JSON.stringify({
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        provider: 'google'
+      }));
+      
+      setLoading(false);
+      onSignIn();
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+  
+  const handleGitHubSignIn = async () => {
+    setError('');
+    setLoading(true);
+    
+    try {
+      const result = await signInWithPopup(auth, githubProvider);
+      const user = result.user;
+      
+      localStorage.setItem('documind_current_user', JSON.stringify({
+        id: user.uid,
+        name: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL,
+        provider: 'github'
+      }));
+      
+      setLoading(false);
+      onSignIn();
+    } catch (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     // Save users to localStorage whenever it changes
@@ -131,69 +180,7 @@ function SignInModal({ isOpen, onClose, onSignIn }) {
     }, 500);
   };
 
-  const handleGoogleSignIn = () => {
-    setError('');
-    setLoading(true);
-    
-    // Simulate OAuth flow
-    setTimeout(() => {
-      const mockGoogleUser = {
-        id: 'google_' + Date.now(),
-        name: 'Google User',
-        email: 'user@gmail.com',
-        provider: 'google',
-        createdAt: new Date().toISOString()
-      };
-
-      // Check if user exists
-      const existingUser = users.find(u => u.email === mockGoogleUser.email);
-      if (!existingUser) {
-        setUsers([...users, mockGoogleUser]);
-      }
-
-      localStorage.setItem('documind_current_user', JSON.stringify({
-        id: mockGoogleUser.id,
-        name: mockGoogleUser.name,
-        email: mockGoogleUser.email,
-        provider: 'google'
-      }));
-
-      setLoading(false);
-      onSignIn();
-    }, 1000);
-  };
-
-  const handleGitHubSignIn = () => {
-    setError('');
-    setLoading(true);
-    
-    // Simulate OAuth flow
-    setTimeout(() => {
-      const mockGitHubUser = {
-        id: 'github_' + Date.now(),
-        name: 'GitHub User',
-        email: 'user@github.com',
-        provider: 'github',
-        createdAt: new Date().toISOString()
-      };
-
-      // Check if user exists
-      const existingUser = users.find(u => u.email === mockGitHubUser.email);
-      if (!existingUser) {
-        setUsers([...users, mockGitHubUser]);
-      }
-
-      localStorage.setItem('documind_current_user', JSON.stringify({
-        id: mockGitHubUser.id,
-        name: mockGitHubUser.name,
-        email: mockGitHubUser.email,
-        provider: 'github'
-      }));
-
-      setLoading(false);
-      onSignIn();
-    }, 1000);
-  };
+  
 
   const toggleMode = () => {
     setIsSignUp(!isSignUp);
