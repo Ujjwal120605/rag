@@ -2,21 +2,27 @@ import React, { useState } from 'react';
 import GradientBlinds from './GradientBlinds';
 import Navbar from './Navbar';
 import About from './About';
-import SignInModal from './SignInModal'; // Add this import
+import SignInModal from './SignInModal';
+import DocumentAnalyzer from './DocumentAnalyzer'; // Import the DocumentAnalyzer component
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
   const [isHovered, setIsHovered] = useState(false);
-  const [showSignInModal, setShowSignInModal] = useState(false); // Add this state
+  const [showSignInModal, setShowSignInModal] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false); // Track sign-in status
 
   const handleGetStarted = () => {
-    setShowSignInModal(true); // Show modal instead of direct redirect
+    setShowSignInModal(true);
   };
 
   const handleSignIn = () => {
     setShowSignInModal(false);
-    // Redirect to your app after sign in
-    window.location.href = 'https://xhafk39x7r8rvjkwli6wbn.streamlit.app/';
+    setIsSignedIn(true); // Set signed in status
+    setCurrentPage('analyzer'); // Navigate to analyzer page
+  };
+
+  const handleBackToHome = () => {
+    setCurrentPage('home');
   };
 
   return (
@@ -24,24 +30,28 @@ function App() {
       width: '100vw',
       minHeight: '100vh',
       position: 'relative',
-      overflow: currentPage === 'about' ? 'auto' : 'hidden',
+      overflow: currentPage === 'about' || currentPage === 'analyzer' ? 'auto' : 'hidden',
       margin: 0,
       padding: 0,
       background: '#000'
     }}>
-      <Navbar 
+      {/* Show Navbar only on home and about pages */}
+      {currentPage !== 'analyzer' && (
+        <Navbar 
           onNavigate={setCurrentPage} 
           currentPage={currentPage}
-          onTryNow={() => setShowSignInModal(true)} // Add this prop
+          onTryNow={() => setShowSignInModal(true)}
         />
+      )}
 
-      {/* Add SignInModal here */}
+      {/* SignInModal */}
       <SignInModal 
         isOpen={showSignInModal} 
         onClose={() => setShowSignInModal(false)} 
         onSignIn={handleSignIn}
       />
 
+      {/* Home Page */}
       {currentPage === 'home' && (
         <div style={{ height: '100vh', overflow: 'hidden' }}>
           <GradientBlinds
@@ -121,7 +131,13 @@ function App() {
         </div>
       )}
 
+      {/* About Page */}
       {currentPage === 'about' && <About onNavigate={setCurrentPage} />}
+
+      {/* Document Analyzer Page */}
+      {currentPage === 'analyzer' && isSignedIn && (
+        <DocumentAnalyzer onBack={handleBackToHome} />
+      )}
     </div>
   );
 }
