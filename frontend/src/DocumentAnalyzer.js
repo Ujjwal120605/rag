@@ -2,9 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Upload, FileText, MessageSquare, BarChart3, Settings, Send, Download, RefreshCw, Trash2, Eye, EyeOff, Check, AlertCircle, Loader2, X, Menu, Moon, Bug } from 'lucide-react';
 
 const DocumentAnalyzer = () => {
-  const [apiKey, setApiKey] = useState(process.env.REACT_APP_GEMINI_API_KEY || '');
-  const [showApiKey, setShowApiKey] = useState(false);
-  const [apiKeySaved, setApiKeySaved] = useState(false);
+  
+
+  const apiKey = process.env.REACT_APP_GEMINI_API_KEY;
+
+  
+
+  
+  
   const [selectedModel, setSelectedModel] = useState('gemini-2.0-flash-exp');
   const [temperature, setTemperature] = useState(0.3);
   const [activeMode, setActiveMode] = useState('chat');
@@ -40,11 +45,7 @@ const DocumentAnalyzer = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (apiKey && apiKey.length > 10) {
-      setApiKeySaved(true);
-    }
-  }, [apiKey]);
+
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -60,18 +61,11 @@ const DocumentAnalyzer = () => {
     setTimeout(() => setSuccess(''), 3000);
   };
 
-  const saveApiKey = () => {
-    if (apiKey) {
-      setApiKeySaved(true);
-      showSuccess('API Key saved for this session!');
-    }
-  };
+  
+  
 
-  const clearApiKey = () => {
-    setApiKey('');
-    setApiKeySaved(false);
-    showSuccess('API Key cleared');
-  };
+  
+  
 
   const extractTextFromTXT = async (file) => {
     return new Promise((resolve, reject) => {
@@ -536,27 +530,11 @@ Your analysis:`;
         {showSidebar && (
           <div style={{ background: 'rgba(26, 22, 37, 0.7)', borderRadius: '1rem', boxShadow: '0 8px 32px rgba(0,0,0,0.3)', padding: '1.5rem', height: 'fit-content', position: 'sticky', top: '1.5rem', border: '1px solid rgba(167, 139, 250, 0.1)', backdropFilter: 'blur(10px)' }}>
             <div style={{ marginBottom: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb' }}><Settings size={20} color="#a78bfa" />Configuration</h3>
-              <div style={{ marginBottom: '1rem' }}>
-                <label style={{ fontSize: '0.875rem', fontWeight: '500', color: '#d1d5db', display: 'block', marginBottom: '0.5rem' }}>Google AI API Key</label>
-                {apiKeySaved ? (
-                  <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: '#86efac', marginBottom: '0.5rem' }}><Check size={16} /><span>API Key Loaded</span></div>
-                    <button onClick={clearApiKey} style={{ fontSize: '0.875rem', color: '#fca5a5', background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}>Clear Key</button>
-                  </div>
-                ) : (
-                  <div>
-                    <div style={{ position: 'relative', marginBottom: '0.5rem' }}>
-                      <input type={showApiKey ? 'text' : 'password'} value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder="Enter your API key" style={{ width: '100%', padding: '0.5rem 2.5rem 0.5rem 0.75rem', border: '1px solid #3d3650', borderRadius: '0.5rem', fontSize: '0.875rem', background: '#1a1625', color: '#e5e7eb' }} />
-                      <button onClick={() => setShowApiKey(!showApiKey)} style={{ position: 'absolute', right: '0.5rem', top: '0.625rem', background: 'transparent', border: 'none', cursor: 'pointer' }}>{showApiKey ? <EyeOff size={16} color="#9ca3af" /> : <Eye size={16} color="#9ca3af" />}</button>
-                    </div>
-                    {apiKey && <button onClick={saveApiKey} style={{ width: '100%', padding: '0.5rem 0.75rem', background: 'linear-gradient(135deg, #22c55e, #16a34a)', color: 'white', border: 'none', borderRadius: '0.5rem', fontSize: '0.875rem', cursor: 'pointer', marginBottom: '0.5rem', fontWeight: '500' }}>Save API Key</button>}
-                    <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.75rem', color: '#60a5fa', textDecoration: 'none' }}>Get API Key →</a>
-                    <p style={{ fontSize: '0.7rem', color: '#9ca3af', marginTop: '0.5rem', lineHeight: '1.4' }}>💡 Tip: Create a .env file with REACT_APP_GEMINI_API_KEY=your_key</p>
-                  </div>
-                )}
-              </div>
-            </div>
+  <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', color: '#e5e7eb' }}>
+    <Settings size={20} color="#a78bfa" />Configuration
+  </h3>
+</div>
+
 
             <div style={{ marginBottom: '1.5rem' }}>
               <label style={{ fontSize: '0.875rem', fontWeight: '500', color: '#d1d5db', display: 'block', marginBottom: '0.5rem' }}>Application Mode</label>
